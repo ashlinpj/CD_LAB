@@ -12,7 +12,7 @@ int comment = 0;
 
 "/*"([^*]|\*+[^*/])*\*+"/"  { comment++; }
 
-[0-9]+                  { printf("%s\tNumber\n", yytext); }
+[0-9]+                  { fprintf(yyout, "%s\tNumber\n", yytext); }
 
 [a-zA-Z_][a-zA-Z0-9_]*  {
                             if (strcmp(yytext, "int") == 0 ||
@@ -21,16 +21,16 @@ int comment = 0;
                                 strcmp(yytext, "if") == 0 ||
                                 strcmp(yytext, "else") == 0 ||
                                 strcmp(yytext, "main") == 0)
-                                printf("%s\tKeyword\n", yytext);
+                                fprintf(yyout, "%s\tKeyword\n", yytext);
                             else
-                                printf("%s\tIdentifier\n", yytext);
+                                fprintf(yyout, "%s\tIdentifier\n", yytext);
                         }
 
-(==|<=|>=|!=|<|>)       { printf("%s\tRelational Operator\n", yytext); }
+(==|<=|>=|!=|<|>)       { fprintf(yyout, "%s\tRelational Operator\n", yytext); }
 
-[=+\-*/%]               { printf("%s\tArithmetic Operator\n", yytext); }
+[=+\-*/%]               { fprintf(yyout, "%s\tArithmetic Operator\n", yytext); }
 
-[(){};,]                { printf("%s\tSpecial Symbol\n", yytext); }
+[(){};,]                { fprintf(yyout, "%s\tSpecial Symbol\n", yytext); }
 
 [ \t\n]+                { /* Ignore whitespace */ }
 
@@ -41,18 +41,22 @@ int comment = 0;
 int main()
 {
     yyin = fopen("input.txt", "r");
+    yyout = fopen("output.txt", "w");
 
-    if (yyin == NULL)
+    if (yyin == NULL || yyout == NULL)
     {
-        printf("File not found\n");
+        printf("File opening failed\n");
         return 1;
     }
 
     yylex();
 
-    printf("\n%d Comments Ignored\n", comment);
+    fprintf(yyout, "\n%d Comments Ignored\n", comment);
 
     fclose(yyin);
+    fclose(yyout);
+
+    printf("Output saved successfully in output.txt\n");
 
     return 0;
 }

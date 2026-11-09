@@ -1,3 +1,4 @@
+//recursive decent parser for arithmetic expression
 
 #include <stdio.h>
 #include <ctype.h>

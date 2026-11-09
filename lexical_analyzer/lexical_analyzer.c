@@ -16,13 +16,13 @@ int isKeyword(char word[])
            strcmp(word, "main") == 0;
 }
 
-int isOperator(int ch)
+int isOperator(char ch)
 {
     return ch == '+' || ch == '-' || ch == '*' ||
            ch == '/' || ch == '%' || ch == '=';
 }
 
-int isSymbol(int ch)
+int isSymbol(char ch)
 {
     return ch == '(' || ch == ')' ||
            ch == '{' || ch == '}' ||
@@ -94,7 +94,7 @@ int main(void)
                 if (next == '/') {
                     while ((ch = fgetc(fp)) != EOF &&
                            ch != '\n')
-                        ;
+        
                     continue;
                 }
 

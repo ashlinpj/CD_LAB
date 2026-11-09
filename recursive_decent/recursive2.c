@@ -1,5 +1,13 @@
 //recursive decent parser for boolean expression
 
+/*
+Grammar Productions:
+E  -> T E'
+E' -> || T E' | epsilon
+T  -> F T'
+T' -> && F T' | epsilon
+F  -> !F | (E) | id
+*/
 
 #include <stdio.h>
 #include <ctype.h>

@@ -73,7 +73,7 @@ void icg()
     char ch, a1, a2, res = '0';
     printf("OPR\tA1\tA2\tRES\n");
     
-    for (int i = 0; pex[i] != 0; i++)
+    for (int i = 0; pex[i] != '\0'; i++)
     {
         ch = pex[i];
 

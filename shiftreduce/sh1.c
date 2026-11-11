@@ -12,7 +12,8 @@ Grammar:
 
 char stk[60],inp[60];
 int scnt=0,icnt=0;
-
+//scnt---->stack counter
+//icnt---->input counter
 int reduce(char ch,int index,char *trans)
 {
     scnt=index;
